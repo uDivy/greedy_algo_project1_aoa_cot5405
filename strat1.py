@@ -30,13 +30,13 @@ def max_painted_houses(houses, n):
     return painted
 
 # read input
-# n, m = map(int, input().split())
-# houses = [tuple(map(int, input().split())) for _ in range(m)]
+n, m = map(int, input().split())
+houses = [tuple(map(int, input().split())) for _ in range(m)]
 
 # read input from file
-with open("input_50.txt", "r") as f:
-	n, m = map(int, f.readline().split())
-	houses = [tuple(map(int, line.split())) for line in f]
+# with open("input_5000.txt", "r") as f:
+# 	n, m = map(int, f.readline().split())
+# 	houses = [tuple(map(int, line.split())) for line in f]
 
 # call the function and print the output
 painted = max_painted_houses(houses, n)
