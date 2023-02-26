@@ -1,33 +1,28 @@
 import heapq
 
 def max_houses_painted(n, m, houses):
-    # sort houses based on startDay
-    houses.sort(key=lambda h: h[0])
+    # sort houses based on startDay and endDay (if startDay is same)
+    houses.sort(key=lambda h: (h[0],h[1]))
 
     # Initialize the priority queue and other variables
     pq = []
     houses_painted = []
-    painted = [False] * (m+1)
     location = 0
     
     # Iterate over each day
     for day in range(1, n+1):
-        # Add all unpainted houses that are available on this day to the priority queue
-
+        # Paint the house with the shortest available duration
         while houses and houses[0][0] <= day:
             start_day, end_day = houses.pop(0)
             location += 1
-            heapq.heappush(pq, (end_day-start_day+1,location))
+            heapq.heappush(pq, ((end_day-start_day+1,end_day),location))
         
-        # Paint the house with the shortest available duration
-        if pq:
+        while pq:
             print(pq)
-            duration, pos = heapq.heappop(pq)
-            if not painted[pos]:
+            (_, end_day), pos = heapq.heappop(pq)
+            if end_day >= day:
                 houses_painted.append(pos)
-                painted[pos] = True
-
-        print("h_p", houses_painted)
+                break
     
     return houses_painted
 
@@ -55,5 +50,18 @@ print(len(painted))
 # 4 5 4
 # 5 8 7
 # 5 9 8
+# 5 9
+# 9 10
+
+#INPUT
+# 9 10
+# 1 2 
+# 2 4 
+# 2 3 
+# 3 4 
+# 4 6 
+# 4 5 
+# 5 8 
+# 5 9 
 # 5 9
 # 9 10
