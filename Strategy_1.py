@@ -8,23 +8,31 @@ def max_houses(n, m, houses):
     pq = []
     houses_painted = []
     location = 0
+    day = 1
+    ptr = 0
 
-    for day in range(1, n+1):
+    # Building Priority Queue based startDay in ascending order.
+    for i in range(m):
+        start_day, end_day = houses[i]
+        location += 1
+        heapq.heappush(pq, ((start_day,end_day),location))
+    
+    while day <= n and pq:
 
-        # Paint the house which is recently published
+        start_day, end_day = houses[ptr]
+
+        # Skip the day if there is no available house
+        if start_day > day:
+            day += 1
+            continue
+        (start_day, end_day), pos = heapq.heappop(pq)
+
+        # Paint a house
+        if start_day <= day and end_day >= day:
+            houses_painted.append(pos)
+            day += 1
+            ptr = pos
         
-        while houses and houses[0][0] <= day:
-            start_day, end_day = houses.pop(0)
-            location += 1
-            heapq.heappush(pq, ((-start_day,end_day),location))
-        
-        while pq:
-            print(pq)
-            (start_day, end_day), pos = heapq.heappop(pq)
-            if end_day >= day:
-                houses_painted.append(pos)
-                break
-
     return houses_painted
 
 # read input
@@ -39,14 +47,4 @@ houses = [tuple(map(int, input().split())) for _ in range(m)]
 # call the function and print the output
 painted = max_houses(n, m, houses)
 print(' '.join(map(str, painted)))
-print(len(painted))
-
-# 7 8
-# 1 2
-# 3 4
-# 4 5
-# 4 5
-# 5 6
-# 5 6
-# 5 8
-# 9 10
+# print(len(painted))

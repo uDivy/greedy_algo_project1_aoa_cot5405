@@ -8,22 +8,27 @@ def max_houses(n, m, houses):
     pq = []
     houses_painted = []
     location = 0
+    ptr = 0
+    day = 1
 
-    for day in range(1, n+1):
+    for i in range(m):
+        start_day, end_day = houses[i]
+        location += 1
+        heapq.heappush(pq, ((-start_day,end_day),location))
 
-        # Paint the house which is recently published
-        
-        while houses and houses[0][0] <= day:
-            start_day, end_day = houses.pop(0)
-            location += 1
-            heapq.heappush(pq, ((-start_day,end_day),location))
-        
-        while pq:
-            print(pq)
-            (start_day, end_day), pos = heapq.heappop(pq)
-            if end_day >= day:
-                houses_painted.append(pos)
-                break
+    while day <= n and pq:
+
+        # Paint the house which is recently published 
+        start_day, end_day = houses[ptr]
+        if start_day > day:
+            day += 1
+            continue
+        (start_day, end_day), pos = heapq.heappop(pq)
+        print(pq, day)
+        if -start_day <= day and end_day >= day:
+            houses_painted.append(pos)
+            day += 1
+            ptr = pos
 
     return houses_painted
 
