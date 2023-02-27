@@ -1,8 +1,10 @@
 run1:
-	python3 strat1.py
+	python3 Strategy_1.py
 run2:
-	python3 strat2.py
+	python3 Strategy_2.py
 run3:
-	python3 strat3.py
+	python3 Strategy_3.py
 run4:
-	python3 strat4.py
+	python3 Strategy_4.py
+run5:
+	pytohn3 OptimalStrategy.py
