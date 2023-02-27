@@ -32,7 +32,7 @@ n, m = map(int, input().split())
 houses = [tuple(map(int, input().split())) for _ in range(m)]
 
 # read input from file
-# with open("input_3000.txt", "r") as f:
+# with open("input_1000.txt", "r") as f:
 # 	n, m = map(int, f.readline().split())
 # 	houses = [tuple(map(int, line.split())) for line in f]
 
