@@ -1,4 +1,5 @@
 import heapq
+import time
 
 def max_houses(n, m, houses):
     # sort houses based on startDay and endDay (if startDay is same)
@@ -31,11 +32,15 @@ n, m = map(int, input().split())
 houses = [tuple(map(int, input().split())) for _ in range(m)]
 
 # read input from file
-# with open("input_1000.txt", "r") as f:
+# with open("input_95000.txt", "r") as f:
 # 	n, m = map(int, f.readline().split())
 # 	houses = [tuple(map(int, line.split())) for line in f]
 
 # call the function and print the output
+# st = time.time()
 painted = max_houses(n, m, houses)
+# et = time.time()
 print(' '.join(map(str, painted)))
 # print(len(painted))
+# elapsed_time = et - st
+# print('Execution time:', elapsed_time, 'seconds')

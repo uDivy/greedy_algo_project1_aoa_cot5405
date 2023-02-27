@@ -1,7 +1,7 @@
 import random
 
-n = 1000
-m = 500
+n = 95000
+m = 95000
 outFile = open(f'input_{n}.txt', 'w')
 print(n, m, end=' ',file=outFile)
 print(file=outFile)
