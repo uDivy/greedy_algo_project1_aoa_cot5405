@@ -11,16 +11,15 @@ def max_houses(n, m, houses):
 
     for day in range(1, n+1):
 
-        # Paint the house which is recently published
-        
+        # Build the heap for the house endDay in the ascending order
         while houses and houses[0][0] <= day:
             start_day, end_day = houses.pop(0)
             location += 1
-            heapq.heappush(pq, ((-start_day,end_day),location))
+            heapq.heappush(pq, ((end_day,start_day),location))
         
+        # Paint the house that stop being available the earliest
         while pq:
-            print(pq)
-            (start_day, end_day), pos = heapq.heappop(pq)
+            (end_day, start_day), pos = heapq.heappop(pq)
             if end_day >= day:
                 houses_painted.append(pos)
                 break
@@ -32,21 +31,11 @@ n, m = map(int, input().split())
 houses = [tuple(map(int, input().split())) for _ in range(m)]
 
 # read input from file
-# with open("input_5000.txt", "r") as f:
+# with open("input_1000.txt", "r") as f:
 # 	n, m = map(int, f.readline().split())
 # 	houses = [tuple(map(int, line.split())) for line in f]
 
 # call the function and print the output
 painted = max_houses(n, m, houses)
 print(' '.join(map(str, painted)))
-print(len(painted))
-
-# 7 8
-# 1 2
-# 3 4
-# 4 5
-# 4 5
-# 5 6
-# 5 6
-# 5 8
-# 9 10
+# print(len(painted))
