@@ -1,5 +1,6 @@
 import time
 import heapq
+
 def max_houses(n, m, houses):
 
     # sort houses based on end day in ascending order
@@ -17,7 +18,7 @@ def max_houses(n, m, houses):
         while i < len(houses) and houses[i][0] > curr_day:
             i += 1
         
-        if i < len(houses):
+        if i < len(houses) and pq:
             # remove the painted house from the list
             houses_painted.append(heapq.heappop(pq)[1])
         
@@ -28,7 +29,6 @@ def max_houses(n, m, houses):
 # read input
 n, m = map(int, input().split())
 houses = [tuple(map(int, input().split())) for i in range(m)]
-
 
 # read input from file
 # with open("input_95000.txt", "r") as f:
